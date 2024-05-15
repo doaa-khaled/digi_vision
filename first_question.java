@@ -29,8 +29,10 @@ public class Main {
             throw new Exception("String should contains balanced parentheses!");
           }  
           Matcher m = Pattern.compile("\\(([^)]+)\\)").matcher(input);
+          StringBuilder substring = null;
           while(m.find()) {
-            input = (input.replace("(" + m.group(1) + ")","(" + new StringBuilder(m.group(1)).reverse() + ")"));
+            substring = new StringBuilder(m.group(1)).reverse();
+            input = (input.replace("(" + m.group(1) + ")","(" + substring + ")"));
           }
           System.out.println(input);
 
