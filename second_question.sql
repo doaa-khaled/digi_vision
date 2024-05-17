@@ -12,4 +12,6 @@ group by
   tr.training_id, 
   tr.training_date 
 having 
-  count(1) > 1;
+  count(1) > 1 
+order by 
+  tr.training_date desc;
