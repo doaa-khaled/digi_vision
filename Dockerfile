@@ -1,11 +1,9 @@
 FROM openjdk:17-jdk-slim
 
-WORKDIR /app
+VOLUME /tmp
 
-COPY . /app
+ARG JAR_FILE=target/*.jar
 
-RUN ./mvnw clean package
+COPY ${JAR_FILE} app.jar
 
-EXPOSE 8080
-
-CMD ["java", "-jar", "target/files-1.0.jar"]
+ENTRYPOINT ["java","-jar","/app.jar"]
