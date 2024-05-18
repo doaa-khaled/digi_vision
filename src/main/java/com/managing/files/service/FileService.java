@@ -19,11 +19,11 @@ public class FileService {
 	@Autowired
 	PermissionService permissionService;
 
-	public File getFile(Integer itemId, String userEmail) {
+	public File getFile(Integer fileId, String userEmail) {
 		List<String> permissionsOfUser = permissionService.getPermissionLevelsForUser(userEmail);
 		if(!permissionsOfUser.contains(Permissions.EDIT_SPACE.toString()) && !permissionsOfUser.contains(Permissions.EDIT_FOLDER.toString()))
 			return null;
-		return fileRepository.getById((long)itemId);
+		return fileRepository.getById((long)fileId);
 	}
 
 	

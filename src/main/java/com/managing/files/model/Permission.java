@@ -8,7 +8,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "permission")
 public class Permission {
 	
 	@Id
@@ -18,6 +17,9 @@ public class Permission {
     private String userEmail;
     
     private String permissionLevel;
+    
+    @ManyToOne
+    private Item item;
     
     @ManyToOne
     private PermissionGroup group;
@@ -44,6 +46,14 @@ public class Permission {
 
 	public void setPermissionLevel(String permissionLevel) {
 		this.permissionLevel = permissionLevel;
+	}
+
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
 	}
 
 	public PermissionGroup getGroup() {

@@ -35,8 +35,8 @@ public class ItemService {
 		PermissionGroup permissionGroup = permissionGroupService.getPermissionGroupByName(PermissionGroups.ADMIN_SPACE.name());
 		item.setPermissionGroup(permissionGroup);
 		item = itemRepository.save(item);
-		permissionService.createPermission(Permissions.EDIT_SPACE.toString(), userEmail, permissionGroup);
-		permissionService.createPermission(Permissions.VIEW_SPACE.toString(), userEmail, permissionGroup);
+		permissionService.createPermission(Permissions.EDIT_SPACE.toString(), userEmail, permissionGroup, item);
+		permissionService.createPermission(Permissions.VIEW_SPACE.toString(), userEmail, permissionGroup, item);
 		return item;
 	}
 
@@ -52,8 +52,8 @@ public class ItemService {
 		PermissionGroup permissionGroup = permissionGroupService.getPermissionGroupByName(PermissionGroups.ADMIN_FOLDER.name());
 		item.setPermissionGroup(permissionGroup);
 		item = itemRepository.save(item);
-		permissionService.createPermission(Permissions.EDIT_FOLDER.toString(), userEmail, permissionGroup);
-		permissionService.createPermission(Permissions.VIEW_FOLDER.toString(), userEmail, permissionGroup);
+		permissionService.createPermission(Permissions.EDIT_FOLDER.toString(), userEmail, permissionGroup, item);
+		permissionService.createPermission(Permissions.VIEW_FOLDER.toString(), userEmail, permissionGroup, item);
 		return item;
 	}
 
@@ -69,15 +69,15 @@ public class ItemService {
 		item.setPermissionGroup(permissionGroup);
 		item = itemRepository.save(item);
 		File file = fileService.createFile(item, bs);
-		permissionService.createPermission(Permissions.EDIT_FILE.toString(), userEmail, permissionGroup);
-		permissionService.createPermission(Permissions.VIEW_FILE.toString(), userEmail, permissionGroup);		
+		permissionService.createPermission(Permissions.EDIT_FILE.toString(), userEmail, permissionGroup, item);
+		permissionService.createPermission(Permissions.VIEW_FILE.toString(), userEmail, permissionGroup, item);		
 		return file;
 	}
 
-	public Item getFile(Integer itemId, String userEmail) {
+	public Item getFile(Integer fileId, String userEmail) {
 		List<String> permissionsOfUser = permissionService.getPermissionLevelsForUser(userEmail);
 		if(!permissionsOfUser.contains(Permissions.EDIT_FILE.toString()))
 			return null;
-		return itemRepository.getById((long)itemId);
+		return itemRepository.getById((long)fileId);
 	}
 }

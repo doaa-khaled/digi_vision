@@ -8,7 +8,6 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "file")
 public class File {
 	
 	@Id
@@ -16,7 +15,7 @@ public class File {
     private Long id;
 	
     private byte[] binaryD;
-    
+        
     @OneToOne
     private Item item;
 
