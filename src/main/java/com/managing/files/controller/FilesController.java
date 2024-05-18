@@ -69,9 +69,9 @@ public class FilesController {
 		return ResponseEntity.ok(item);
 	}
 	
-	@GetMapping("/download-file/{itemId}/{userEmail}")
-	public ResponseEntity<byte[]> downloadFile(@PathVariable Integer itemId, @PathVariable String userEmail) {
-	    File file = fileService.getFile(itemId, userEmail);
+	@GetMapping("/download-file/{fileId}/{userEmail}")
+	public ResponseEntity<byte[]> downloadFile(@PathVariable Integer fileId, @PathVariable String userEmail) {
+	    File file = fileService.getFile(fileId, userEmail);
 		if(file == null)
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 	    return ResponseEntity.ok()
